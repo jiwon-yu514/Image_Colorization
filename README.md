@@ -40,3 +40,5 @@
 
 ## **[Flowchart]**  
 <img width="931" alt="image" src="https://github.com/user-attachments/assets/e9747624-d94c-4ca9-afb4-0e1f2b7a4ffd" />
+
+## 모델 구조
