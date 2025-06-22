@@ -29,3 +29,5 @@
   ▪️ 교육 자료, 디지털 박물관 등에서 활용 가능  
   ▪️ 가정 내 가족 사진, 졸업 사진 등 추억을 컬러로 복원하는 서비스로 감성적 만족 제공
 
+## **[Flowchart]**  
+<img width="931" alt="image" src="https://github.com/user-attachments/assets/e9747624-d94c-4ca9-afb4-0e1f2b7a4ffd" />
