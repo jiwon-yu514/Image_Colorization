@@ -65,7 +65,7 @@
 ## **모델 분석**
 ### **초기 복원 결과**
 <img width="857" alt="image" src="https://github.com/user-attachments/assets/a3bca198-04cb-4c95-87a9-8358c6193426" />  
-### **초기 성능 지표**  
+### **초기 성능 지표**    
 | Metric | Score   |  
 |--------|---------|  
 | PSNR   | 23.04   |  
