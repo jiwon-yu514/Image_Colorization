@@ -66,7 +66,11 @@
 ### **초기 복원 결과**
 <img width="857" alt="image" src="https://github.com/user-attachments/assets/a3bca198-04cb-4c95-87a9-8358c6193426" />
 ### **초기 성능 지표**  
-| PSNT | SSIM | LPIPS | FID |
-|------|------|-------|-----|
-|23.04|0.8210|0.1865|106.43|
+
+| Metric | Score   |  
+|--------|---------|  
+| PSNR   | 23.04   |  
+| SSIM   | 0.8210  |  
+| LPIPS  | 0.1865  |  
+| FID    | 106.43  |  
 
