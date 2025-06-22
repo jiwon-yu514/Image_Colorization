@@ -1,0 +1,9 @@
+Pillow
+lpips
+matplotlib
+numpy
+opencv-python
+scikit-image
+torch
+torch_fidelity
+torchvision
