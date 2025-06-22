@@ -30,7 +30,15 @@
   ▪️ 가정 내 가족 사진, 졸업 사진 등 추억을 컬러로 복원하는 서비스로 감성적 만족 제공  
 # 연구 방법  
 ## 데이터셋  
-kaggle의 "Landscape color and grayscale images"를 사용함. 이 데이터를 다 사용하지 않고 이미지를 뽑아 각각 train(1500장)/test(150장)/val(100장)으로 나누어 실험 진행
+### 🗂️ 데이터셋 구성
+
+본 프로젝트에서는 Kaggle에서 제공하는 **Landscape color and grayscale images** 데이터셋을 사용함.  
+전체 데이터셋은 약 14,000장 이상의 이미지로 구성되어 있으나,  
+초기 실험 단계에서는 학습 파이프라인 검증 및 성능 점검을 목적으로 일부 샘플만 추출하여 사용하여 실행함.
+
+- Train: 1,500장  
+- Validation: 100장  
+- Test: 150장  
 
 ## **[Flowchart]**  
 <img width="931" alt="image" src="https://github.com/user-attachments/assets/e9747624-d94c-4ca9-afb4-0e1f2b7a4ffd" />
