@@ -39,6 +39,7 @@ gray_transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize([0.5], [0.5])
 ])
+dataset = CustomDataset(gray_dir=gray_dir, color_dir=color_dir, transform=gray_transform)
 
 # 커스텀 데이터셋 정의
 from torch.utils.data import Dataset
@@ -75,12 +76,12 @@ class CustomDataset(Dataset):
         return {'A': gray_img, 'B': color_img}
 
 # 데이터 경로 설정
-gray_dir = '/content/drive/MyDrive/프로젝트/DataFinal/gray'
-color_dir = '/content/drive/MyDrive/프로젝트/DataFinal/color'
-test_dir = '/content/drive/MyDrive/프로젝트/DataFinal/test'
+gray_dir = 'gray_path'
+color_dir = 'color_path'
+test_dir = 'test_path'
 
-val_gray_dir = '/content/drive/MyDrive/프로젝트/DataFinal/validation/val_gray'
-val_color_dir = '/content/drive/MyDrive/프로젝트/DataFinal/validation/val_color'
+val_gray_dir = 'val_gray_path'
+val_color_dir = 'val_color_path'
 
 
 # 데이터 로더 정의
@@ -90,6 +91,16 @@ dataloader = DataLoader(dataset, batch_size=CFG['BATCH_SIZE'], shuffle=True, num
 val_dataset = CustomDataset(gray_dir=val_gray_dir, color_dir=val_color_dir, transform=gray_transform)
 val_dataloader = DataLoader(val_dataset, batch_size=CFG['BATCH_SIZE'], shuffle=False, num_workers=1)
 
+from torch.utils.data import DataLoader
+
+train_dataset = CustomDataset(
+    gray_dir=gray_dir,
+    color_dir=color_dir,
+    transform=gray_transform,
+    target_transform=color_transform  # 반드시 필요
+)
+
+train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=0)
 # worker 시드 고정 함수
 def seed_worker(worker_id):
     worker_seed = torch.initial_seed() % 2**32
@@ -98,6 +109,15 @@ def seed_worker(worker_id):
 
 g = torch.Generator()
 g.manual_seed(42)
+
+dataloader = DataLoader(
+    dataset,
+    batch_size=CFG['BATCH_SIZE'],
+    shuffle=True,
+    num_workers=0,
+    worker_init_fn=seed_worker,
+    generator=g
+)
 
 # 테스트 이미지 로딩 함수 정의
 def load_image(image_path, transform):
