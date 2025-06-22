@@ -62,7 +62,7 @@
 ▪️ 2개의 이미지의 유사도를 평가하기 위해 사용되는 지표  
 ▪️ 0에 가까울수록 품질이 좋음  
 
--FID - Fréchet inception distance  
+- FID - Fréchet inception distance  
 ▪️ 실제 이미지와 생성된 이미지가 얼마나 유사한지 계산하는 지표  
 ▪️ 30 이하이면 품질이 좋다고 판단하고, 10 이하이면 실제 이미지와 거의 유사하다고 판단함  
 
@@ -82,7 +82,7 @@
 ### **최종 복원 결과**  
 <img width="886" alt="image" src="https://github.com/user-attachments/assets/3c64461c-4589-42de-9c55-72045d4e794a" />
 
-### **초기 성능 지표**
+### **최종 성능 지표**
 
 | Metric | Score   |  
 |--------|---------|  
