@@ -49,17 +49,18 @@
 
 ## 3. **모델 구조**
 <img width="868" alt="image" src="https://github.com/user-attachments/assets/a7b17315-3bff-4774-ad96-c13ecf121c2e" />
+
 ---
 - Generator : U-Net 구조 기반  
-▪️ 인코더-디코더 구조로, 입력 흑백 이미지로부터 컬러 이미지를 생성  
-▪️ Skip Connection을 통해 해상도 손실을 최소화하고 세부 정부 보존  
-- Discriminator : PatchGAN 구조
-▪️ 이미지 전체가 아닌 패치 단위로 진짜/가짜 판별  
-▪️ 세밀한 영역에서도 현실적인 컬러화를 유도  
--  Loss 구성
-▪️ GAN Loss : Generator의 현실성 향상  
-▪️ Pixel-wise Loss(L1 Loss) : GT 이미지와의 직접적인 차이 최소화  
-▪️ Perceptual Loss(VGG19 기반) : 시각적으로 유사한 이미지를 만들도록 유도(고차원 피처 기반 비교)
+▪️ 인코더-디코더 구조로, 입력 흑백 이미지로부터 컬러 이미지를 생성    
+▪️ Skip Connection을 통해 해상도 손실을 최소화하고 세부 정부 보존    
+- Discriminator : PatchGAN 구조  
+▪️ 이미지 전체가 아닌 패치 단위로 진짜/가짜 판별    
+▪️ 세밀한 영역에서도 현실적인 컬러화를 유도    
+-  Loss 구성  
+▪️ GAN Loss : Generator의 현실성 향상    
+▪️ Pixel-wise Loss(L1 Loss) : GT 이미지와의 직접적인 차이 최소화    
+▪️ Perceptual Loss(VGG19 기반) : 시각적으로 유사한 이미지를 만들도록 유도(고차원 피처 기반 비교)  
 
 ## 4. **성능 지표**   
 - PSNR - Peak Signal-to-noise ratio   
