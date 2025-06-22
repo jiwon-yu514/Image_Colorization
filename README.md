@@ -48,8 +48,9 @@
 
 ## **모델 구조**
 <img width="868" alt="image" src="https://github.com/user-attachments/assets/a7b17315-3bff-4774-ad96-c13ecf121c2e" />
-## **성능 지표**  
-- PSNR - Peak Signal-to-noise ratio  
+
+## **성능 지표**   
+- PSNR - Peak Signal-to-noise ratio   
 ▪️ 생성 혹은 압축된 영상의 화질에 대한 손실 정보를 평가하는 지표  
 ▪️ 30 이상이면 품질이 좋다고 판단  
 
