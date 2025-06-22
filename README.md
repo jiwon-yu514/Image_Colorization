@@ -32,7 +32,8 @@
 ### [구성]  
 - 01_preoprocessing_and_loader : 데이터 로드 및 전처리  
 - 02_model_and_training : 모델 학습 및 시각화, 평가  
-- Flask : flask를 활용한 웹페이지  
+- Flask : flask를 활용한 웹페이지
+- requirements : 필요한 라이브러리
 # 연구 방법  
 ## 1. 데이터셋  
 본 프로젝트에서는 Kaggle에서 제공하는 **Landscape color and grayscale images** 데이터셋을 사용함.  
@@ -48,8 +49,19 @@
 
 ## 3. **모델 구조**
 <img width="868" alt="image" src="https://github.com/user-attachments/assets/a7b17315-3bff-4774-ad96-c13ecf121c2e" />
+---
+- Generator : U-Net 구조 기반  
+▪️ 인코더-디코더 구조로, 입력 흑백 이미지로부터 컬러 이미지를 생성  
+▪️ Skip Connection을 통해 해상도 손실을 최소화하고 세부 정부 보존  
+- Discriminator : PatchGAN 구조
+▪️ 이미지 전체가 아닌 패치 단위로 진짜/가짜 판별  
+▪️ 세밀한 영역에서도 현실적인 컬러화를 유도  
+-  Loss 구성
+▪️ GAN Loss : Generator의 현실성 향상  
+▪️ Pixel-wise Loss(L1 Loss) : GT 이미지와의 직접적인 차이 최소화  
+▪️ Perceptual Loss(VGG19 기반) : 시각적으로 유사한 이미지를 만들도록 유도(고차원 피처 기반 비교)
 
-## 4. *성능 지표**   
+## 4. **성능 지표**   
 - PSNR - Peak Signal-to-noise ratio   
 ▪️ 생성 혹은 압축된 영상의 화질에 대한 손실 정보를 평가하는 지표  
 ▪️ 30 이상이면 품질이 좋다고 판단  
@@ -78,7 +90,7 @@
 | SSIM   | 0.8210  |  
 | LPIPS  | 0.1865  |  
 | FID    | 106.43  |  
-
+---
 ## 7. **최종 복원 결과**  
 <img width="886" alt="image" src="https://github.com/user-attachments/assets/3c64461c-4589-42de-9c55-72045d4e794a" />
 
