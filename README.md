@@ -30,8 +30,8 @@
   ▪️ 가정 내 가족 사진, 졸업 사진 등 추억을 컬러로 복원하는 서비스로 감성적 만족 제공
 
 ### [구성]  
-- 01_preoprocessing_and_loader : 데이터 로드 및 전처리  
-- 02_model_and_training : 모델 학습 및 시각화, 평가  
+- 01_preoprocessing : 데이터 로드 및 전처리  
+- 02_model : 모델 학습 및 시각화, 평가  
 - Flask : flask를 활용한 웹페이지
 - requirements : 필요한 라이브러리
 # 연구 방법  
