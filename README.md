@@ -64,9 +64,9 @@
 
 ## **모델 분석**
 ### **초기 복원 결과**
-결과 1
-결과 2
-결과 3
-원본
 <img width="857" alt="image" src="https://github.com/user-attachments/assets/a3bca198-04cb-4c95-87a9-8358c6193426" />
+### **초기 성능 지표**
+| PSNT | SSIM | LPIPS | FID |
+|------|------|-------|-----|
+|23.04| 0.8210 | 0.1865 | 106.43|
 
