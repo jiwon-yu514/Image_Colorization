@@ -38,7 +38,21 @@
 - Validation: 100장  
 - Test: 150장  
 
-## **[Flowchart]**  
+## **Flowchart**  
 <img width="931" alt="image" src="https://github.com/user-attachments/assets/e9747624-d94c-4ca9-afb4-0e1f2b7a4ffd" />
 
-## 모델 구조
+## **모델 구조**
+<img width="868" alt="image" src="https://github.com/user-attachments/assets/a7b17315-3bff-4774-ad96-c13ecf121c2e" />
+## **성능 지표**
+- PSNR - Peak Signal-to-noise ratio
+▪️ 생성 혹은 압축된 영상의 화질에 대한 손실 정보를 평가하는 지표
+▪️ 30 이상이면 품질이 좋다고 판단
+- SSIM - Structural Similarity Index Measure
+▪️ 수치적인 에러가 아닌 인간의 시각적 화질 차이를 평가하는 지표
+▪️ 1에 가까울수록 품질이 좋음
+- LPIPS – Learned Perceptual Image Patch Similarity
+▪️ 2개의 이미지의 유사도를 평가하기 위해 사용되는 지표
+▪️ 0에 가까울수록 품질이 좋음
+-FID - Fréchet inception distance
+▪️ 실제 이미지와 생성된 이미지가 얼마나 유사한지 계산하는 지표 
+▪️ 30 이하이면 품질이 좋다고 판단하고, 10 이하이면 실제 이미지와 거의 유사하다고 판단함
