@@ -75,3 +75,15 @@
 | LPIPS  | 0.1865  |  
 | FID    | 106.43  |  
 
+### **최종 복원 결과**  
+<img width="886" alt="image" src="https://github.com/user-attachments/assets/3c64461c-4589-42de-9c55-72045d4e794a" />
+
+### **초기 성능 지표**
+
+| Metric | Score   |  
+|--------|---------|  
+| PSNR   | 29.25   |  
+| SSIM   | 0.9334  |  
+| LPIPS  | 0.0609  |  
+| FID    | 33.57   |  
+
