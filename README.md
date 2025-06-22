@@ -29,8 +29,8 @@
   ▪️ 교육 자료, 디지털 박물관 등에서 활용 가능  
   ▪️ 가정 내 가족 사진, 졸업 사진 등 추억을 컬러로 복원하는 서비스로 감성적 만족 제공  
 # 연구 방법  
-## 데이터셋
-
+## 데이터셋  
+kaggle의 "Landscape color and grayscale images"를 사용함. 이 데이터를 다 사용하지 않고 이미지를 뽑아 각각 train(1500장)/test(150장)/val(100장)으로 나누어 실험 진행
 
 ## **[Flowchart]**  
 <img width="931" alt="image" src="https://github.com/user-attachments/assets/e9747624-d94c-4ca9-afb4-0e1f2b7a4ffd" />
