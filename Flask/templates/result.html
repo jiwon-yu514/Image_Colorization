@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HueRevive - 결과 선택</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f2e9dc, #d8c3a5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #ffffff;
+            padding: 3em 4em;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 95%;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        .result-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: nowrap;
+        }
+        .divider {
+            width: 2px;
+            background-color: #ccc;
+            height: 350px;
+            border-radius: 1px;
+        }
+        .image-block {
+            text-align: center;
+            transition: 0.3s;
+            border: 4px solid transparent;
+            border-radius: 15px;
+            padding: 5px;
+        }
+        .image-block:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+        .image-block.no-hover:hover {
+            transform: none;
+            cursor: default;
+        }
+        .image-block.selected {
+            border-color: #a47148;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+        img {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            height: 300px;
+        }
+        .btn {
+            padding: 0.8em 3em;
+            border: none;
+            border-radius: 10px;
+            background: #a47148;
+            color: #fff;
+            font-size: 1.2em;
+            margin-top: 2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .btn:hover {
+            background: #8c5c32;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>색상화 결과 선택</h1>
+
+    <form action="/final_select" method="post">
+        <div class="result-container">
+            <!-- 업로드된 원본 이미지 -->
+            <div class="image-block no-hover">
+                <img src="{{ url_for('send_upload', filename=filename) }}">
+                <p>업로드 이미지</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- 색상화된 결과 선택 -->
+            <div style="display: flex; gap: 30px;">
+                {% for result in result_files %}
+                    <div class="image-block" onclick="selectImage('{{ result }}', this); showImageModal('{{ url_for('send_output', filename=result) }}')">
+                        <img src="{{ url_for('send_output', filename=result) }}">
+                        <p>결과 {{ loop.index }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <input type="hidden" name="selected_image" id="selected_image">
+        <button class="btn" type="button" onclick="showConfirm()">최종 선택</button>
+    </form>
+</div>
+
+<!-- 이미지 모달 -->
+<div id="imgModal" style="
+  display:none; position:fixed; top:0; left:0;
+  width:100vw; height:100vh;
+  background:rgba(0,0,0,0.9);
+  z-index:2000;
+  justify-content:center;
+  align-items:center;
+  overflow:auto;
+  flex-direction: column;
+">
+
+  <!-- ❌ 닫기 버튼 -->
+  <div style="width: 100%; display: flex; justify-content: flex-end; padding: 20px; position: absolute; top: 0; right: 0;">
+    <button onclick="closeImageModal()" style="
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+    ">❌</button>
+  </div>
+
+  <!-- 이미지 -->
+  <img id="modalImg" src="" style="
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    margin-top: 50px;
+  ">
+</div>
+
+
+<!-- 1차 확인 모달 -->
+<div id="confirmModal" style="display:none; position:fixed; top:0; left:0;
+    width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;
+    justify-content:center; align-items:center;">
+    <div style="background:white; padding:30px; border-radius:15px; text-align:center;">
+        <h2>이 추억을 저장하시겠습니까?</h2>
+        <img id="previewImage" src="" style="height:300px; margin:20px; border-radius:10px;">
+        <br>
+        <button class="btn" type="button" onclick="nextConfirm()">저장하기</button>
+        <button class="btn" type="button" onclick="closeConfirm()" style="margin-left:20px;">취소</button>
+    </div>
+</div>
+
+<!-- 2차 감성 모달 -->
+<div id="completeModal" style="display:none; position:fixed; top:0; left:0;
+    width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1001;
+    justify-content:center; align-items:center;">
+    <div style="background:white; padding:30px; border-radius:15px; text-align:center;">
+        <h2>당신의 추억을 저장하겠습니다.</h2>
+        <br>
+        <button class="btn" type="button" onclick="submitForm()">확인</button>
+    </div>
+</div>
+
+<script>
+    function selectImage(filename, element) {
+        document.getElementById("selected_image").value = filename;
+        document.querySelectorAll('.image-block').forEach(block => {
+            block.classList.remove('selected');
+        });
+        element.classList.add('selected');
+    }
+
+    function showConfirm() {
+        const selected = document.getElementById("selected_image").value;
+        if (!selected) {
+            alert("먼저 결과 이미지를 선택해주세요!");
+            return;
+        }
+        const previewPath = "/outputs/" + selected;
+        document.getElementById("previewImage").src = previewPath;
+        document.getElementById("confirmModal").style.display = "flex";
+    }
+
+    function closeConfirm() {
+        document.getElementById("confirmModal").style.display = "none";
+    }
+
+    function nextConfirm() {
+        document.getElementById("confirmModal").style.display = "none";
+        document.getElementById("completeModal").style.display = "flex";
+    }
+
+    function submitForm() {
+        document.querySelector("form").submit();
+    }
+
+    function showImageModal(src) {
+        const modal = document.getElementById("imgModal");
+        const modalImg = document.getElementById("modalImg");
+        modalImg.src = src;
+        modal.style.display = "flex";
+    }
+
+    function closeImageModal() {
+        document.getElementById("imgModal").style.display = "none";
+    }
+
+    // 배경 클릭 시 모달 닫기
+    document.getElementById("imgModal").addEventListener('click', function (e) {
+        if (e.target.id === 'imgModal') {
+            closeImageModal();
+        }
+    });
+
+
+    // ESC 키 눌렀을 때 모달 닫기
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeImageModal();
+        }
+    });
+</script>
+
+</body>
+</html>

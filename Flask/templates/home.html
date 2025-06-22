@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HueRevive</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f2e9dc, #d8c3a5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+    background: #ffffff;
+    padding: 4em 5em;  /* padding을 기존보다 넓게 → 흰색 여백 넓어짐 */
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+        .card:hover { transform: scale(1.03); }
+        h1 { color: #2c3e50; font-size: 2.5em; margin-bottom: 0.5em; }
+        p { color: #7f8c8d; font-size: 1.2em; margin-bottom: 1.5em; }
+        .btn {
+            padding: 0.8em 2em;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 50px;
+            background: #a47148;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+        .btn:hover { background: #7d5232; transform: translateY(-2px); }
+        .logo {
+    width: 350px;  /* 기존 300px → 350px로 확대 */
+    margin-bottom: 1.5em;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2em; /* 기존 2.5em → 2em로 줄임 */
+    margin-bottom: 0.3em;
+}
+
+p {
+    color: #7f8c8d;
+    font-size: 1em; /* 기존 1.2em → 1em로 줄임 */
+    margin-bottom: 1.2em;
+}
+
+.input-field {
+    width: 220px;
+    padding: 8px 12px;
+    font-size: 0.95em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    outline: none;
+    transition: all 0.3s ease;
+    margin-bottom: 6px;
+}
+
+.input-field:focus {
+    border-color: #a47148;
+    box-shadow: 0 3px 8px rgba(164, 113, 72, 0.3);
+}
+
+
+
+        /* 토스트 알림 스타일 */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #333;
+            color: #fff;
+            padding: 16px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+
+        #toast.success { background-color: green; }
+        #toast.error { background-color: red; }
+
+        /* 흔들리는 애니메이션 */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .shake { animation: shake 0.4s; }
+
+
+    </style>
+</head>
+<body>
+
+<div class="card" id="login-card">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+    <h1>당신의 사진에 생명을 불어넣어보세요.</h1>
+    <p>HueRevive</p>
+        <form action="/login" method="post" style="display: flex; flex-direction: column; align-items: center;">
+            <input type="text" name="username" placeholder="아이디" required class="input-field">
+            <input type="password" name="password" placeholder="비밀번호" required class="input-field">
+            <button type="submit" class="btn" style="margin-top: 15px;">로그인</button>
+        </form>
+
+
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        let category = "{{ messages[0][0] }}";
+        let message = "{{ messages[0][1] }}";
+        const toast = document.getElementById("toast");
+        toast.className = category;
+        toast.innerText = message;
+        toast.style.opacity = 1;
+
+        setTimeout(() => { toast.style.opacity = 0; }, 2000);
+
+        if (category === "error") {
+            document.getElementById("login-card").classList.add("shake");
+        }
+      {% endif %}
+    {% endwith %}
+</script>
+
+</body>
+</html>

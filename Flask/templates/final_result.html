@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>최종 결과</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f2e9dc, #d8c3a5);
+            text-align: center;
+            padding: 50px;
+        }
+        img {
+            border-radius: 10px;
+            max-height: 400px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .btn {
+            padding: 10px 30px;
+            font-size: 1.1em;
+            margin: 15px 8px;
+            border: none;
+            border-radius: 10px;
+            background: #a47148;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #8c5c32;
+            transform: translateY(-2px);
+        }
+        input {
+            padding: 10px;
+            width: 60%;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 선택한 이미지 최종 보기 -->
+    <h1>당신이 선택한 컬러 이미지</h1>
+    <img src="{{ url_for('send_output', filename=selected_image) }}" alt="선택 결과"><br>
+
+    <!-- 저장하기 -->
+    <a href="{{ url_for('download_result', filename=selected_image) }}" download>
+        <button class="btn">📥 저장하기</button>
+    </a>
+
+    <!-- 공유 링크 복사 (한 줄로) -->
+    <div style="display: flex; justify-content: center; gap: 10px; align-items: center; margin-top: 20px;">
+        <input id="shareLink" value="{{ request.url_root }}share/{{ selected_image }}" readonly style="width: 400px;">
+        <button class="btn" onclick="copyShareLink()">📋 복사</button>
+    </div>
+
+    <!-- 홈 / 다시 해보기 / 로그아웃 버튼 세로 정렬 -->
+    <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+        <a href="/dashboard" style="text-decoration: none;">
+            <button class="btn">🌀 다시 해보기</button>
+        </a>
+        <a href="/" style="text-decoration: none;">
+            <button class="btn">🏠 홈으로</button>
+        </a>
+        <a href="/logout" style="text-decoration: none;">
+            <button class="btn">🔓 로그아웃</button>
+        </a>
+    </div>
+
+    <!-- 복사 스크립트 -->
+    <script>
+        function copyShareLink() {
+            const input = document.getElementById("shareLink");
+            const text = input.value;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text)
+                    .then(() => alert("공유 링크가 복사되었습니다!"))
+                    .catch(err => {
+                        console.error("복사 실패:", err);
+                        fallbackCopy(text);
+                    });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const temp = document.createElement("textarea");
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            try {
+                document.execCommand("copy");
+                alert("공유 링크가 복사되었습니다! (호환 모드)");
+            } catch (err) {
+                alert("복사 실패! 직접 복사해주세요.");
+            }
+            document.body.removeChild(temp);
+        }
+    </script>
+</body>
+</html>

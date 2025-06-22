@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>공유된 결과</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f8f8;
+            text-align: center;
+            padding-top: 60px;
+        }
+        img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>공유된 색상화 결과</h1>
+    <img src="{{ url_for('send_output', filename=filename) }}" alt="공유 이미지">
+</body>
+</html>

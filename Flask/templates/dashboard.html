@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HueRevive - Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f2e9dc, #d8c3a5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #ffffff;
+            padding: 4em 5em;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        .upload-box {
+            display: block;
+            border: 2px dashed #a47148;
+            border-radius: 15px;
+            padding: 5em 5em;
+            background: #fdfaf7;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+        .upload-box:hover {
+            background: #f6eee8;
+        }
+        .btn {
+            padding: 0.8em 3em;
+            border: none;
+            border-radius: 10px;
+            background: #a47148;
+            color: #fff;
+            font-size: 1.1em;
+            margin-top: 2em;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #8c5c32;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>흑백 사진을 업로드하세요</h1>
+
+    <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+        <label class="upload-box">
+            클릭하여 이미지 선택
+            <input type="file" id="file-input" name="file" style="display: none;" required>
+        </label>
+        <br><br>
+        <button class="btn" type="submit">색상화 시작</button>
+    </form>
+</div>
+
+<script>
+    document.querySelector(".upload-box").addEventListener("click", () => {
+        document.getElementById("file-input").click();
+    });
+</script>
+
+</body>
+</html>
